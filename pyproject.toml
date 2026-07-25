@@ -1,0 +1,52 @@
+[project]
+name = "pyforge"
+version = "0.1.0"
+description = "SWE Foundation & Mathematical Core Template"
+authors = [
+    {name = "Valentin Haeusler", email = "haeusler.valentin@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26.0",
+]
+
+[tool.poetry]
+packages = [{include = "pyforge", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.8.0",
+    "ruff>=0.2.0",
+    "pytest>=8.0.0"
+]
+
+# Strikte Type-Checking Konfiguration (Google / DeepMind Standard)
+[tool.mypy]
+python_version = "3.12"
+strict = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+
+# Modernes Linting & Formatting
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # Pyflakes
+    "I",  # isort (Import Sortierung)
+    "B",  # flake8-bugbear (häufige Bugs)
+    "A",  # flake8-builtins
+    "UP", # pyupgrade (moderne Python-Syntax erzwingen)
+]

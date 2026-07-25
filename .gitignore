@@ -1,0 +1,16 @@
+# Python / Environment
+__pycache__/
+*.py[cod]
+.venv/
+.poetry/
+dist/
+build/
+*.egg-info/
+
+# Tooling Caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# OS spezifisch
+.DS_Store
