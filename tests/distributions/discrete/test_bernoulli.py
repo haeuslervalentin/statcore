@@ -32,3 +32,11 @@ def test_bernoulli_mle_fit_synthetic_data() -> None:
 
     assert np.isclose(estimated_p, true_p, atol=1e-2)
     assert np.isclose(dist.p, estimated_p)
+
+
+def test_bernoulli_validation_raise_error() -> None:
+    """Überprüft, ob bei ungültigen Eingaben (Daten außerhalb von {0, 1}) ein ValueError geworfen wird."""
+
+    dist = Bernoulli(p=0.5)
+    with pytest.raises(ValueError):
+        dist.validate_data(np.array([5, 6]))
