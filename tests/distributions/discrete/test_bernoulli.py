@@ -35,7 +35,8 @@ def test_bernoulli_mle_fit_synthetic_data() -> None:
 
 
 def test_bernoulli_validation_raise_error() -> None:
-    """Überprüft, ob bei ungültigen Eingaben (Daten außerhalb von {0, 1}) ein ValueError geworfen wird."""
+    """Überprüft, ob bei ungültigen Eingaben (Daten außerhalb von {0, 1})
+    ein ValueError geworfen wird."""
 
     dist = Bernoulli(p=0.5)
     with pytest.raises(ValueError):
