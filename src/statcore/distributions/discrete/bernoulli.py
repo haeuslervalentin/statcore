@@ -10,8 +10,12 @@ class Bernoulli(DiscreteDistribution):
 
         self.p = p
 
-    def pmf(self, k: float) -> float:
-        return np.power(self.p, k) * np.power((1 - self.p), (1 - k))
+    def pmf(self, k: np.ndarray) -> np.ndarray:
+        return np.where(
+            (k == 0.0) | (k == 1.0),
+            (np.power(self.p, k) * np.power((1 - self.p), (1 - k))),
+            0.0,
+        )
 
     def log_likelihood(self, data: np.ndarray) -> float:
         self.validate_data(data)
@@ -26,7 +30,7 @@ class Bernoulli(DiscreteDistribution):
 
         p_hat = np.mean(
             data
-        )  # unser Schätzer für Bernoulli selbst hergeleitet in der Mitschrift
+        )  # Schätzer für Bernoulli selbst hergeleitet in der Mitschrift
 
         self.p = p_hat  # jetzt lernt Instanz aus den Daten
 
