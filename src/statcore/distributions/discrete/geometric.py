@@ -19,15 +19,19 @@ class Geometric(DiscreteDistribution):
         if np.any(data % 1 != 0):
             raise ValueError("data values must be values of integer.")
 
-    def log_likelihood(self, data: np.ndarray) -> float:
-        return (data - 1) * np.log(1 - self.p) + np.log(self.p)
-
     def pmf(self, k: np.ndarray) -> np.ndarray:
         self.validate_data(data=k)
 
-        log_pmf = self.log_likelihood(data=k)
+        log_pmf = (k - 1) * np.log(1 - self.p) + np.log(self.p)
 
         return np.exp(log_pmf)
+
+    def log_likelihood(self, data: np.ndarray) -> float:
+        self.validate_data(data=data)
+
+        log_pmf = (data - 1) * np.log(1 - self.p) + np.log(self.p)
+
+        return float(np.sum(log_pmf))
 
     def mle_fit(self, data: np.ndarray) -> float:
         self.validate_data(data=data)

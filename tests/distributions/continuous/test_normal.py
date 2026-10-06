@@ -21,7 +21,7 @@ def test_normal_pdf_correctness() -> None:
 def test_normal_mle_fit_converges_stably() -> None:
     """Tests if the mle_fit function konverts even noisy data stabel"""
 
-    data_generator = np.random.default_rng()
+    data_generator = np.random.default_rng(seed=42)
     data = np.array(data_generator.normal(loc=0.75, scale=1.5, size=10000))
 
     dist = Normal(mu=0.75, sigma=1.5)
@@ -42,7 +42,7 @@ def test_normal_validate_data_error_handling_correctness() -> None:
     inf_data = np.array([0.5, 0.0, np.inf, 1.0])
 
     with pytest.raises(ValueError):
-        to_small_sigma = Normal(mu=0.75, sigma=-0.75)
+        Normal(mu=0.75, sigma=-0.75)
 
     with pytest.raises(ValueError):
         dist.validate_data(data=nan_data)
